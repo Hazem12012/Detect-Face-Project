@@ -1,3 +1,93 @@
+
+.appvideo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 300px; 
+  background-color: #121212;
+  border-radius: 30px;
+  padding: 20px;
+}
+
+/* Video Styling */
 .video {
-    transform: scaleX(-1);
+  width: 90%; 
+  max-width: 800px; 
+  height: auto;
+  border-radius: 30px;
+  transform: scaleX(-1);
+  background-color: #121212;
+  object-fit: contain;
+}
+
+/* Canvas Overlay */
+.canvas {
+  position: absolute;
+  width: 90%;
+  max-width: 800px;
+  height: auto;
+  pointer-events: none;
+  transform: scaleX(-1);
+}
+
+/* Start Camera Button */
+.startBTN {
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  color: white;
+  font-size: 16px; 
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-top: 20px; 
+}
+
+/* Hover Effect */
+.startBTN:hover {
+  background: linear-gradient(45deg, #ff4b2b, #ff416c);
+  transform: scale(1.05);
+}
+
+/* Error Message */
+.error {
+  color: #ff4b2b;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .appvideo {
+    padding: 15px;
   }
+
+  .video,
+  .canvas {
+    width: 100%; 
+    max-width: 600px;
+  }
+
+  .startBTN {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .video,
+  .canvas {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .startBTN {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}

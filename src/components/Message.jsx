@@ -1,8 +1,11 @@
 import React from 'react'
 
-function Message({ value, className, type }) {
+function Message({ value, className, type, children }) {
   return (
-    <h1 type={type} className={className}>{value}</h1>
+    <>
+      <h1 type={type} className={className}>{value}</h1>
+      {children}
+    </>
   )
 }
 

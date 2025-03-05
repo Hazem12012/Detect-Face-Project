@@ -1,0 +1,26 @@
+/** @format */
+
+.copyright {
+  background: #1587a8;
+  z-index: 999999;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffff;
+  font-size: 1rem;
+  letter-spacing: 5px;
+}
+
+@media (min-width: 1200px) {
+  .copyright {
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+}
+@media (max-width: 530px) {
+  .copyright {
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+}
