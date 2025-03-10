@@ -1,0 +1,192 @@
+/** @format */
+
+.image {
+  max-width: 500px;
+}
+
+.imageUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  background-color: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.imagePreview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  transform: scaleX(-1);
+}
+.imageUpload::after {
+  content: "edit";
+  position: absolute;
+  top: 71px;
+  right: 0px;
+  width: 120px;
+  height: 120px;
+  clip-path: circle(49% at 50% 110%);
+  background-color: #8080807d;
+  transform: scale(-1);
+  transition: 0.3s ease-in-out;
+}
+.imageUpload:hover::after {
+  background-color:#808080ad;
+}
+
+.imageUpload::before {
+  content: "Edit";
+  position: absolute;
+  top: 65%;
+  right: 50%;
+  transform: translateX(50%);
+  color: #ffff;
+  z-index: 999;
+  font-size: 20px;
+}
+
+.LoginForm {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 80vh;
+  padding: 20px;
+}
+
+form {
+  max-width: 420px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  /* backdrop-filter: blur(1px); */
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+}
+
+form:hover {
+  transform: scale(1.02);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #ffffff33;
+  border-radius: 15px;
+  margin-top: 50px;
+  gap: 8px;
+  box-shadow: 0px 0px 15px 4px rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+}
+
+.image:hover {
+  transform: scale(1.05);
+}
+
+.inputGroup {
+  margin-bottom: 30px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+.label {
+  display: flex;
+  font-weight: 600;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: white;
+  position: absolute;
+  bottom: 6px;
+  left: 15px;
+  transition: all 0.3s ease-in-out;
+  max-width: fit-content;
+}
+.inputField:hover + .label,
+.inputField:focus + .label,
+.inputField:not(:placeholder-shown) + .label,
+inputGroup:focus-within .label {
+  bottom: 40px;
+}
+
+.inputField {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  outline: none;
+  transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  z-index: 9999;
+}
+
+.submitButton {
+  width: 100%;
+  background: linear-gradient(356deg, #3f51b5, #00bcd4);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 10px 0;
+}
+
+.submitButton:hover {
+  background: linear-gradient(356deg, #3f51b5, #00bcd4);
+  transform: scale(1.05);
+}
+
+.loginRegistered {
+  margin-bottom: 10px;
+}
+
+.loginRegistered a {
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 46px;
+  text-align: center;
+  margin-bottom: 10px;
+  transition: 0.1s ease-in;
+}
+.loginRegistered a:hover {
+  text-decoration: underline;
+  color: #0031d4;
+}
+
+@media (max-width: 768px) {
+  .image {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    flex-direction: column;
+    flex-direction: column;
+    padding: 15px;
+    box-shadow: 0px 0px 15px 4px rgba(7, 123, 219, 0.52);
+  }
+  .image {
+    display: none;
+  }
+  form {
+    box-shadow: 0px 0px 37px 46px rgba(0, 0, 0, 0.1);
+  }
+}

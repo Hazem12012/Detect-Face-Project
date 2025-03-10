@@ -12,6 +12,9 @@
   scroll-behavior: smooth;
   text-decoration: none;
 }
+:root {
+--main-color: #14bdee;
+}
 
 .container {
   padding-left: 15px;
@@ -19,6 +22,11 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+
+
+
+
 
 /* small screen */
   @media (min-width: 768px) {
@@ -41,8 +49,4 @@
   }
 }
 
-@media (min-width: 576px) {
-  .container {
-    min-width: 450px;
-  }
-}
+

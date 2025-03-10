@@ -27,11 +27,11 @@
 
 /* Logo styling */
 .logo {
-  width: 200px;
+  width: 250px;
   height: auto;
   display: flex;
   align-items: center;
-  margin-left:50px ;
+  margin-bottom: 12px;
 }
 .nav a:global(.active)::after {
   content: "";
@@ -46,6 +46,9 @@ ul {
   display: flex;
   gap: 1.5rem;
   list-style: none;
+}
+.nav a:global(.active) {
+  color: var(--main-color);
 }
 .nav a:link,
 .nav a:visited:hover {
@@ -66,6 +69,11 @@ ul li a:hover {
   color: #007bff;
 }
 
+@media (min-width: 768px) {
+  .logo {
+    margin-left: 50px;
+  }
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   .nav {
@@ -111,5 +119,4 @@ ul li a:hover {
 }
 .logo_link {
   display: flex;
-  
 }

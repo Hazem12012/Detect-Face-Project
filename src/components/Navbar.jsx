@@ -9,10 +9,10 @@ function Navbar() {
             <Link to="/" className={styles.logo_link}><img src={logo} alt="not found" className={styles.logo} /></Link>
             <ul className="nav-links">
                 <li>
-                    <NavLink className={styles.navLink} to="/">Registration</NavLink>
+                    <NavLink className={styles.navLink} to="/">Login</NavLink>
                 </li>
                 <li>
-                    <NavLink className={styles.navLink} to="/Login">Login</NavLink>
+                    <NavLink className={styles.navLink} to="/Login">Registration</NavLink>
                 </li>
                 <li>
                     <NavLink className={styles.navLink} to="/User_guide">User guide</NavLink>

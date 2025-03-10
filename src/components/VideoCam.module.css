@@ -1,3 +1,4 @@
+/** @format */
 
 .appvideo {
   display: flex;
@@ -5,45 +6,47 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 300px; 
-  background-color: #121212;
-  border-radius: 30px;
-  padding: 20px;
+  overflow: hidden;
+  position: relative;
+  height: 80vh;
+  height: -webkit-fill-available;
 }
 
 /* Video Styling */
 .video {
-  width: 90%; 
-  max-width: 800px; 
+  width: 100%;
+  max-width: 800px;
   height: auto;
   border-radius: 30px;
-  transform: scaleX(-1);
   background-color: #121212;
   object-fit: contain;
+  overflow: hidden;
 }
 
 /* Canvas Overlay */
 .canvas {
   position: absolute;
-  width: 90%;
+  top: 0;
+  left: 0;
+  width: 100%;
   max-width: 800px;
-  height: auto;
+  height: 100%;
   pointer-events: none;
-  transform: scaleX(-1);
 }
 
 /* Start Camera Button */
 .startBTN {
   background: linear-gradient(45deg, #ff416c, #ff4b2b);
   color: white;
-  font-size: 16px; 
+  font-size: 16px;
   font-weight: bold;
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  margin-top: 20px; 
+  margin-top: 20px;
+  transform: translateY(-12px);
 }
 
 /* Hover Effect */
@@ -51,6 +54,7 @@
   background: linear-gradient(45deg, #ff4b2b, #ff416c);
   transform: scale(1.05);
 }
+/* background: linear-gradient(45deg, #2196F3, #e91e63a8); */
 
 /* Error Message */
 .error {
@@ -61,15 +65,43 @@
   padding: 10px;
 }
 
+.reloadBtn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: rgb(255, 145, 0);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.reloadBtn:hover {
+  background: red;
+}
+
+.video,
+.imageCaptured,
+.canvas {
+  display: block;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+.video,
+.canvas {
+  width: min(100%, 800px);
+  height: auto;
+}
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .appvideo {
-    padding: 15px;
+    /* padding: 15px; */
   }
 
   .video,
   .canvas {
-    width: 100%; 
+    width: 100%;
     max-width: 600px;
   }
 
@@ -78,7 +110,12 @@
     padding: 8px 16px;
   }
 }
-
+@media (hover: hover) {
+  .startBTN:hover {
+    background: linear-gradient(45deg, #ff4b2b, #ff416c);
+    transform: scale(1.05);
+  }
+}
 @media (max-width: 480px) {
   .video,
   .canvas {

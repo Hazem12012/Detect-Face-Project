@@ -1,0 +1,12 @@
+/** @format */
+
+.loading {
+  display: flex;
+  position: absolute;
+
+  z-index: 999999999;
+  font-size: 32px;
+  color: red;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,18 +1,109 @@
 /** @format */
-.registration {
-  margin-bottom: 200px;
-}
+
 .preview {
   background-color: #101810c7;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   padding: 10px;
   position: relative;
   top: 45px;
   border-radius: 30px;
-
+  min-height: 500px;
+  width: 100%;
+  gap: 40px;
+  align-items: center;
+  box-shadow: -18px 15px 11px 0px rgb(0 0 0 / 52%);
+  border: 5px solid #393939;
+  margin-bottom: 30px;
 }
 
+.registration {
+  background: linear-gradient(282deg, #0b1830, #2a5298);
+  min-height: 80vh;
+  padding: 20px;
+}
 
+.image_poster {
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-in-out;
+}
 
+.image_poster:hover {
+  transform: scale(1.05);
+}
+
+.accessCam {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  text-align: center;
+}
+
+.accessCam p {
+  font-size: 28px;
+  max-width: 70%;
+  color: #fff;
+  text-align: center;
+  transition: color 0.3s ease-in-out;
+}
+
+.accessCam p:hover {
+  color: #14bdee;
+}
+
+.accessCam p i {
+  display: inline;
+  margin-right: 9px;
+  color: #14bdee;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .preview {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+  }
+  .image_poster {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .preview {
+    flex-direction: column;
+    height: auto;
+    gap: 20px;
+    padding: 15px;
+  }
+  .image_poster {
+    max-width: 300px;
+  }
+  .accessCam p {
+    font-size: 24px;
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .preview {
+    top: 20px;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 16px 5px rgb(0 0 0 / 52%);
+    padding: 15px;
+  }
+  .accessCam p {
+    width: 100%;
+    font-size: 22px;
+  }
+  .image_poster {
+    max-width: 250px;
+  }
+}

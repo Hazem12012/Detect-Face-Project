@@ -1,0 +1,52 @@
+/**
+ * Start Camera Button
+ *
+ * @format
+ */
+
+.start_btn {
+  background: linear-gradient(128deg, #00bcd4, #3f51b5);
+
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-top: 20px;
+  transform: translateY(-12px);
+  width: 400px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: 0.3s;
+}
+.start_btn i {
+  display: contents;
+  font-size: 23px;
+  color: #b2b2b2;
+  transform: translateY(-10px);
+}
+/* Hover Effect */
+.start_btn:hover {
+  background: linear-gradient(128deg, #00bcd4, #3f51b5);
+  transform: scale(1.05);
+}
+@media (max-width: 480px) {
+  .start_btn {
+    font-size: 12px;
+    padding: 6px 12px;
+    width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .start_btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}

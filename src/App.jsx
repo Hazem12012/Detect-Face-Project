@@ -1,23 +1,29 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React from 'react'
-import VideoCam from './components/VideoCam';
-import Registration from "./Bages/Registration";
+import { useState } from 'react'
 import Login from "./Bages/Login";
+import Registration from "./Bages/Registration";
 import User_guide from "./Bages/User_guide";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import SplashScreen from "./Bages/SplashScreen";
+import Post from "./components/post"
+
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
+
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={< Registration />} />
-        <Route path="/Login" element={< Login />} />
-        <Route path="/User_guide" element={< User_guide />} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    showSplash ? (<SplashScreen onFinish={() => { setShowSplash(false) }} />) :
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={< Registration />} />
+          <Route path="/login" element={< Login />} />
+          <Route path="/User_guide" element={< User_guide />} />
+        </Routes>
+        <Post/>
+        <Footer />
+      </BrowserRouter>
   )
 }
 
