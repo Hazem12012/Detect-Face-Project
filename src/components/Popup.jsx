@@ -37,7 +37,7 @@ const Popup = ({ isOpen, onClose, onDataReceived, setBackImage, type }) => {
                 setCheck(data)
               }}  
             />
-            <div>
+          
               {" "}
               <button className={styles.closeBtn} onClick={() => {
                 setImage(null);
@@ -52,7 +52,7 @@ const Popup = ({ isOpen, onClose, onDataReceived, setBackImage, type }) => {
               }}>
                 OK
               </button>}
-            </div>
+          
           </motion.div>
         </motion.div>
       )}

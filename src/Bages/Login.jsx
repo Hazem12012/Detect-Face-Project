@@ -9,6 +9,8 @@ import DemoImage from "../components/assets/demo-Image.jpg";
 
 export default function Login() {
   const [showPopup, setShowPopup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [formatData, setFormatData] = useState({
     image: null,
     name: "",
@@ -23,37 +25,72 @@ export default function Login() {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitted Data:", formatData);
   };
-
   const handleForm = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
 
     if (!formatData.image) {
-      alert("يرجى اختيار صورة!");
+      alert("Please select an image!");
+      setIsLoading(false);
       return;
     }
 
-    const formData = new FormData();
-    formData.append("image", formatData.image);
-    formData.append("name", formData.name);
-    formData.append("id", formData.id);
 
-    console.log(formData)
+    const formData = new FormData();
+
+
+    if (formatData.image.startsWith('data:image')) {
+      const base64Response = await fetch(formatData.image);
+      const blob = await base64Response.blob();
+      formData.append("image", blob, "image.jpg");
+    } else {
+      formData.append("image", formatData.image);
+    }
+
+
+    formData.append("student_id", formatData.id); // Match API expectation
+    formData.append("name", formatData.name);
+
     try {
       const response = await fetch(
-        "end point",
+        "https://faceattend.up.railway.app/api/v1/students/register",
         {
           method: "POST",
           body: formData,
+          // Let browser set the Content-Type header for FormData
         }
       );
 
-      if (!response.ok) throw new Error("فشل في رفع الصورة");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Registration failed');
+      }
 
-      console.log("✅ تم رفع الصورة بنجاح!");
+      const data = await response.json();
+      console.log('Success:', data);
+      alert('Registration successful!');
+
+
+      setFormatData({
+        image: null,
+        name: "",
+        id: ""
+      });
+
     } catch (error) {
-      console.error("❌ خطأ:", error);
+      console.error('Error:', error);
+      alert(error.message);
+    }
+    finally {
+      setIsLoading(false)
+    }
+  };
+  const handleImageUpload = (file) => {
+    if (file instanceof File) {
+      setFormatData((prev) => ({ ...prev, image: file }));
+    } else {
+      console.error("❌ Invalid file received:", file);
     }
   };
 
@@ -82,12 +119,13 @@ export default function Login() {
                 e.preventDefault(); // Fixed preventDefault syntax
                 setShowPopup(true);
               }}
+              disabled={isLoading}
             >
               <img
                 src={formatData.image || DemoImage}
                 alt="Uploaded"
                 className={styles.imagePreview}
-                onChange={handleChange}
+                onChange={handleImageUpload}
               />
             </button>
 
@@ -100,6 +138,8 @@ export default function Login() {
                 onChange={handleChange}
                 className={styles.inputField}
                 required
+                disabled={isLoading}
+                placeholder=""
               />
               <label className={styles.label}>Full Name</label>
             </div>
@@ -113,6 +153,8 @@ export default function Login() {
                 onChange={handleChange}
                 className={styles.inputField}
                 required
+                disabled={isLoading}
+                placeholder=""
               />
               <label className={styles.label}>ID</label>
             </div>
@@ -121,8 +163,8 @@ export default function Login() {
             <div className={styles.loginRegistered}>
               <Link to="/">Are you already registered?</Link>
             </div>
-            <button type="submit" className={styles.submitButton} onClick={handleForm}>
-              Submit
+            <button type="submit" className={styles.submitButton} onClick={handleForm} disabled={isLoading}>
+              {isLoading ? "Registering..." : "Submit"}
             </button>
           </form>
         </div>

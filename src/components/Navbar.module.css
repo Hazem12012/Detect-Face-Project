@@ -50,8 +50,7 @@ ul {
 .nav a:global(.active) {
   color: var(--main-color);
 }
-.nav a:link,
-.nav a:visited:hover {
+.nav a:link:hover {
   color: #14bdee;
 }
 .container p:first-child {

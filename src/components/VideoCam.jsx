@@ -60,31 +60,31 @@ export default function VideoCam({ sendData, detectCheck }) {
   const faceMyDetect = useCallback(() => {
     detectIntervalRef.current = setInterval(async () => {
       if (!videoRef.current || !canvasRef.current) return;
-  
+
       const detections = await faceapi
         .detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions())
         .withFaceLandmarks()
         .withFaceExpressions();
-  
+
       setFaceDetected(detections.length > 0);
-  
+
       const canvas = canvasRef.current;
       const video = videoRef.current;
-  
+
       canvas.replaceChildren(faceapi.createCanvasFromMedia(videoRef.current));
       faceapi.matchDimensions(canvas, { width: video.videoWidth, height: video.videoHeight });
-  
+
       const resizedDetections = faceapi.resizeResults(detections, {
         width: video.videoWidth,
         height: video.videoHeight,
       });
-  
+
       faceapi.draw.drawDetections(canvas, resizedDetections);
       faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
       faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
     }, 1000);
   }, []);
-  
+
 
   // Take Photo
   const takePhoto = useCallback(() => {
@@ -110,14 +110,14 @@ export default function VideoCam({ sendData, detectCheck }) {
       clearInterval(detectIntervalRef.current); // Stop face detection interval
       detectIntervalRef.current = null;
     }
-  
+
     if (videoRef.current && videoRef.current.srcObject) {
       let tracks = videoRef.current.srcObject.getTracks();
       tracks.forEach((track) => track.stop());
       videoRef.current.srcObject = null;
     }
   };
-  
+
 
   // Start Video & Load Models on Component Mount
   useEffect(() => {
@@ -128,14 +128,14 @@ export default function VideoCam({ sendData, detectCheck }) {
 
   // Start Face Detection Once Models Are Loaded
 
-useEffect(() => {
-  startVideo();
-  loadModels().then(() => {
-    faceMyDetect();
-  });
+  useEffect(() => {
+    startVideo();
+    loadModels().then(() => {
+      faceMyDetect();
+    });
 
-  return () => stopVideo(); // Cleanup function
-}, [startVideo, loadModels, faceMyDetect]);
+    return () => stopVideo(); // Cleanup function
+  }, [startVideo, loadModels, faceMyDetect]);
 
   // Take Photo When Face is Detected
   useEffect(() => {
@@ -143,7 +143,7 @@ useEffect(() => {
       setTimeout(() => {
         takePhoto();
         stopVideo();
-      }, 800);
+      }, 400);
     }
   }, [faceDetected, takePhoto, image]);
 
@@ -173,9 +173,6 @@ useEffect(() => {
         ></video>
         <canvas ref={canvasRef} className={styles.canvas}></canvas></>
       }
-
-
-
       {image && (
         <div className={styles.photoContainer}>
           <img src={image} alt="Captured" className={styles.imageCaptured} />

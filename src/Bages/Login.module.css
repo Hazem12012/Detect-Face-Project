@@ -2,6 +2,7 @@
 
 .image {
   max-width: 500px;
+  transition: 0.3s ease-in;
 }
 
 .imageUpload {
@@ -25,7 +26,7 @@
   transform: scaleX(-1);
 }
 .imageUpload::after {
-  content: "edit";
+  content: "";
   position: absolute;
   top: 71px;
   right: 0px;
@@ -37,18 +38,19 @@
   transition: 0.3s ease-in-out;
 }
 .imageUpload:hover::after {
-  background-color:#808080ad;
+  background-color: #808080ad;
 }
 
 .imageUpload::before {
   content: "Edit";
   position: absolute;
-  top: 65%;
+  top: 70%;
   right: 50%;
   transform: translateX(50%);
   color: #ffff;
   z-index: 999;
-  font-size: 20px;
+  font-size: 17px;
+  font-weight: bold;
 }
 
 .LoginForm {
@@ -60,7 +62,7 @@
 form {
   max-width: 420px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
   /* backdrop-filter: blur(1px); */
   padding: 25px;
   border-radius: 12px;
@@ -80,7 +82,7 @@ form:hover {
 .content {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   border: 3px solid #ffffff33;
   border-radius: 15px;
   margin-top: 50px;
@@ -115,8 +117,7 @@ form:hover {
 }
 .inputField:hover + .label,
 .inputField:focus + .label,
-.inputField:not(:placeholder-shown) + .label,
-inputGroup:focus-within .label {
+.inputField:not(:placeholder-shown) + .label {
   bottom: 40px;
 }
 
@@ -173,6 +174,9 @@ inputGroup:focus-within .label {
 @media (max-width: 768px) {
   .image {
     display: none;
+  }
+  .content {
+    justify-content: center;
   }
 }
 

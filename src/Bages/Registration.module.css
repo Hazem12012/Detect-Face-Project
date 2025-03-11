@@ -32,7 +32,7 @@
 }
 
 .image_poster:hover {
-  transform: scale(1.05);
+  transform: scale(1.01);
 }
 
 .accessCam {
@@ -69,6 +69,7 @@
     align-items: center;
     gap: 30px;
     padding: 20px;
+    margin-bottom: 100px;
   }
   .image_poster {
     max-width: 350px;

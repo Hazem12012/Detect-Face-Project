@@ -1,46 +1,46 @@
 /** @format */
 
 .appvideo {
-  display: flex;
+  display: blok;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   overflow: hidden;
   position: relative;
-  height: 80vh;
+  /* max-width: 80vh; */
   height: -webkit-fill-available;
 }
 
 /* Video Styling */
 .video {
   width: 100%;
-  max-width: 800px;
-  height: auto;
   border-radius: 30px;
   background-color: #121212;
   object-fit: contain;
-  overflow: hidden;
 }
 
 /* Canvas Overlay */
 .canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  max-width: 800px;
-  height: 100%;
-  pointer-events: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 80%;
 }
 
+@media (max-width: 480px) {
+  .canvas {
+    /* top: -100px; */
+  }
+}
 /* Start Camera Button */
 .startBTN {
   background: linear-gradient(45deg, #ff416c, #ff4b2b);
   color: white;
   font-size: 16px;
   font-weight: bold;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -90,8 +90,8 @@
 }
 .video,
 .canvas {
-  width: min(100%, 800px);
-  height: auto;
+  width:100%;
+  /* height: auto; */
 }
 /* Responsive Adjustments */
 @media (max-width: 768px) {
@@ -107,7 +107,7 @@
 
   .startBTN {
     font-size: 14px;
-    padding: 8px 16px;
+    padding: 10px 20px;
   }
 }
 @media (hover: hover) {
@@ -123,8 +123,13 @@
     max-width: 400px;
   }
 
+  .appvideo {
+    max-width: 400px;
+    max-height: 400px;
+  }
+
   .startBTN {
     font-size: 12px;
-    padding: 6px 12px;
+    padding: 8px 16px;
   }
 }
