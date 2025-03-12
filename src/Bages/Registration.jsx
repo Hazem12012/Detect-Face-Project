@@ -1,66 +1,115 @@
 /** @format */
 
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import styles from "./Registration.module.css";
 import FaceIdImage from "../components/assets/Face_ID_Poster.webp";
 import Button from "../components/Button";
-import Popup from '../components/Popup';
+import Popup from "../components/Popup";
+import ResponseMessage from "../components/ResponseMessage";
+
 function Registration() {
   const [showPopup, setShowPopup] = useState(false);
-  const [image, setImage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Initially false to avoid blocking
+  const [responseMessage, setResponseMessage] = useState("");
+  const [formatData, setFormatData] = useState({ image: null });
 
+  // Handle Form Submission
+  const handleForm = async () => {
+    if (isLoading) return;
 
-  
-  const handleForm = async (e) => {
-    e.preventDefault();
+    setIsLoading(true);
+    setResponseMessage(""); // Clear old messages
 
-    if (!image) {
-      alert("يرجى اختيار صورة!");
+    if (!formatData.image) {
+      // setResponseMessage("❌ Please select an image!");
+      setIsLoading(false);
       return;
     }
 
     const formData = new FormData();
-    formData.append("image",image);
-
-    console.log(formData)
     try {
+      if (typeof formatData.image === "string" && formatData.image.startsWith("data:image")) {
+        const base64Response = await fetch(formatData.image);
+        const blob = await base64Response.blob();
+        formData.append("image", blob, "image.jpg");
+      } else {
+        formData.append("image", formatData.image);
+      }
+
       const response = await fetch(
-        "end point",
-        {
-          method: "POST",
-          body: formData,
-        }
+        "https://faceattend.up.railway.app/api/v1/attendance/mark-attendance",
+        { method: "POST", body: formData }
       );
 
-      if (!response.ok) throw new Error("فشل في رفع الصورة");
-
-      console.log("✅ تم رفع الصورة بنجاح!");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || "Registration failed");
+      }
+      const data = await response.json();
+      // console.log(data.student_name.toUpperCase())
+      setResponseMessage(`${data.student_name.toUpperCase()} : ${data.message} in ${data.attendance_date} .`
+      );
+      setFormatData({ image: null });
     } catch (error) {
-      console.error("❌ خطأ:", error);
+      setResponseMessage(`❌ Error: ${error.message}`);
+    } finally {
+      setIsLoading(false);
+      setShowPopup(false); // Close popup after submission
     }
   };
+
   return (
     <div className={styles.registration}>
-      <div className={"container"}>
+      <div className="container">
+        {/* Response Message */}
+        {responseMessage && (
+          <ResponseMessage
+            className="Instructive_text"
+            value={responseMessage}
+            onClick={() => setResponseMessage("")}
+          />
+        )}
+
         <div className={styles.preview}>
-          {/* <VideoCam /> */}
           <div className={styles.image_poster}>
-            <img src={FaceIdImage} alt="NotFound" />
+            <img src={FaceIdImage} alt="Face ID Poster" />
           </div>
+
           <div className={styles.accessCam}>
-            <p><span><i className="fa-solid fa-hand-point-right"></i></span>To start scanning your face, please allow access to the camera.</p>
-            <Button className="start_btn" value={"Start Camera"} action={()=>setShowPopup(true )}>
+            <p>
+              <span>
+                <i className="fa-solid fa-hand-point-right"></i>
+              </span>
+              To start scanning your face, please allow access to the camera.
+            </p>
+
+            <Button
+              className="start_btn"
+              value={"Start Camera"}
+              action={() => setShowPopup(true)}
+            >
               <i className="fa-solid fa-camera"></i>
             </Button>
           </div>
         </div>
       </div>
+
       {/* Webcam Popup */}
-      <Popup isOpen={showPopup} onClose={() => setShowPopup(false)}type="registration" />
+      <Popup
+        isLoading={isLoading} // Fixed incorrect prop
+        handleForm={handleForm}
+        isOpen={showPopup}
+        type="registration"
+        onClose={() => setShowPopup(false)}
+        onDataReceived={(data) =>
+          setFormatData((prev) => ({ ...prev, image: data }))
+        }
+        setBackImage={(data) =>
+          setFormatData((prev) => ({ ...prev, image: data }))
+        }
+      />
     </div>
   );
 }
 
 export default Registration;
-

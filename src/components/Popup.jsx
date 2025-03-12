@@ -17,10 +17,17 @@ const popupVariants = {
     transition: { duration: 0.2, ease: "easeIn" },
   },
 };
-const Popup = ({ isOpen, onClose, onDataReceived, setBackImage, type }) => {
-  const [image, setImage] = useState(null)
-  const [check, setCheck] = useState(null)
-
+const Popup = ({
+  isOpen,
+  onClose,
+  onDataReceived,
+  setBackImage,
+  type,
+  handleForm,
+  isLoading
+}) => {
+  const [image, setImage] = useState(null);
+  const [check, setCheck] = useState(false);
   return (
     <AnimatePresence>
       {isOpen && ( // AnimatePresence works correctly now
@@ -30,29 +37,46 @@ const Popup = ({ isOpen, onClose, onDataReceived, setBackImage, type }) => {
           animate="visible"
           exit="exit">
           <motion.div className={styles.popup} variants={popupVariants}>
-            <VideoCam sendData={(data) => {
-              setImage(data);
-            }}
+            <VideoCam
+              sendData={(data) => {
+                setImage(data);
+              }}
               detectCheck={(data) => {
-                setCheck(data)
-              }}  
-            />
-          
-              {" "}
+                setCheck(data);
+              }}
+            />{" "}
+            {type === "registration" && check ? (
               <button className={styles.closeBtn} onClick={() => {
+                setBackImage(image);
+                onDataReceived(image);
+                handleForm()
+              }} >
+                {isLoading ? "Loading..." : "Login"}
+              </button>
+            ) : (
+              ""
+            )}
+            <button
+              className={styles.closeBtn}
+              onClick={() => {
                 setImage(null);
                 onClose();
               }}>
-                Close
-              </button>
-              {type == "registration" || !check ? "" : <button className={styles.okBtn} onClick={() => {
-                setBackImage(image);
-                onDataReceived(image);
-                onClose()
-              }}>
+              Close
+            </button>
+            {type === "registration" || !check ? (
+              ""
+            ) : (
+              <button
+                className={styles.okBtn}
+                onClick={() => {
+                  setBackImage(image);
+                  onDataReceived(image);
+                  onClose();
+                }}>
                 OK
-              </button>}
-          
+              </button>
+            )}
           </motion.div>
         </motion.div>
       )}

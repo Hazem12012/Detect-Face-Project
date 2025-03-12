@@ -6,7 +6,6 @@ import User_guide from "./Bages/User_guide";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SplashScreen from "./Bages/SplashScreen";
-import Post from "./components/post"
 
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
           <Route path="/login" element={< Login />} />
           <Route path="/User_guide" element={< User_guide />} />
         </Routes>
-        <Post/>
         <Footer />
       </BrowserRouter>
   )

@@ -160,7 +160,7 @@ export default function VideoCam({ sendData, detectCheck }) {
     </Message>
   ) : (
     <div className={styles.appvideo}>
-      {!modelsLoaded && <Loading />}
+        {!modelsLoaded && <Loading />}
       {!image && <>
         <video
           poster={Poster}

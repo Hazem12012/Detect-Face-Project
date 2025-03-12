@@ -1,9 +1,7 @@
-/** @format */
-
 .loading {
   display: flex;
   position: absolute;
-
+  top: 50%;
   z-index: 999999999;
   font-size: 32px;
   color: red;

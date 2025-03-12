@@ -1,0 +1,47 @@
+/** @format */
+
+.Instructive_text {
+  width: fit-content;
+  background-color: rgb(21 21 21 / 76%);
+  text-align: center;
+  padding: 30px;
+  border-radius: 20px;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  right: 50%;
+  z-index: 9999;
+  transition: 0.3s ease-in-out;
+  transform: translate(50%, -60%);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  border: 3px dashed #fff;
+  overflow: hidden;
+  opacity: 0;
+}
+.Instructive_text.active {
+  opacity: 1;
+}
+.Instructive_text::before {
+  content: "X";
+  position: absolute;
+  top: -4px;
+  right: -2px;
+  color: red;
+  background: black;
+  width: fit-content;
+  margin: 0;
+  padding: 10px;
+  border-radius: 0px 0px 0px 19px;
+  text-align: center;
+  cursor: pointer;
+}
+.Instructive_text:hover {
+  transform: translate(50%, -60%) scale(1.05);
+}
+.Instructive_text p {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+}
