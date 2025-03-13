@@ -23,7 +23,7 @@ const Popup = ({
   onDataReceived,
   setBackImage,
   type,
-  handleForm,
+  handleImage,
   isLoading
 }) => {
   const [image, setImage] = useState(null);
@@ -45,25 +45,21 @@ const Popup = ({
                 setCheck(data);
               }}
             />{" "}
+
+
             {type === "registration" && check ? (
-              <button className={styles.closeBtn} onClick={() => {
+              <button disabled={isLoading} className={styles.closeBtn} onClick={() => {
                 setBackImage(image);
                 onDataReceived(image);
-                handleForm()
+                handleImage()
+
               }} >
                 {isLoading ? "Loading..." : "Login"}
               </button>
             ) : (
               ""
             )}
-            <button
-              className={styles.closeBtn}
-              onClick={() => {
-                setImage(null);
-                onClose();
-              }}>
-              Close
-            </button>
+
             {type === "registration" || !check ? (
               ""
             ) : (
@@ -77,6 +73,20 @@ const Popup = ({
                 OK
               </button>
             )}
+
+
+
+            {/* common button */}
+            <button
+
+              disabled={isLoading}
+              className={styles.closeBtn}
+              onClick={() => {
+                setImage(null);
+                onClose();
+              }}>
+              Close
+            </button>
           </motion.div>
         </motion.div>
       )}

@@ -13,8 +13,15 @@ function Registration() {
   const [responseMessage, setResponseMessage] = useState("");
   const [formatData, setFormatData] = useState({ image: null });
 
+
+  const handleImageUpload = (file) => {
+    if (file instanceof File) {
+      setFormatData((prev) => ({ ...prev, image: file }));
+    }
+  };
+
   // Handle Form Submission
-  const handleForm = async () => {
+  const handleImage = async () => {
     if (isLoading) return;
 
     setIsLoading(true);
@@ -28,7 +35,10 @@ function Registration() {
 
     const formData = new FormData();
     try {
-      if (typeof formatData.image === "string" && formatData.image.startsWith("data:image")) {
+      if (
+        typeof formatData.image === "string" &&
+        formatData.image.startsWith("data:image")
+      ) {
         const base64Response = await fetch(formatData.image);
         const blob = await base64Response.blob();
         formData.append("image", blob, "image.jpg");
@@ -46,17 +56,20 @@ function Registration() {
         throw new Error(errorData.detail || "Registration failed");
       }
       const data = await response.json();
-      // console.log(data.student_name.toUpperCase())
-      setResponseMessage(`${data.student_name.toUpperCase()} : ${data.message} in ${data.attendance_date} .`
+      setResponseMessage(
+        `${data.student_name.toUpperCase()} : ${data.message} in ${data.attendance_date
+        } .`
       );
       setFormatData({ image: null });
     } catch (error) {
       setResponseMessage(`❌ Error: ${error.message}`);
     } finally {
       setIsLoading(false);
-      setShowPopup(false); // Close popup after submission
+      setShowPopup(false);
     }
   };
+
+
 
   return (
     <div className={styles.registration}>
@@ -86,8 +99,7 @@ function Registration() {
             <Button
               className="start_btn"
               value={"Start Camera"}
-              action={() => setShowPopup(true)}
-            >
+              action={() => setShowPopup(true)}>
               <i className="fa-solid fa-camera"></i>
             </Button>
           </div>
@@ -96,16 +108,18 @@ function Registration() {
 
       {/* Webcam Popup */}
       <Popup
-        isLoading={isLoading} // Fixed incorrect prop
-        handleForm={handleForm}
+        isLoading={isLoading}
+        handleImage={handleImage}
         isOpen={showPopup}
         type="registration"
         onClose={() => setShowPopup(false)}
-        onDataReceived={(data) =>
+        onDataReceived={(data) => {
+          setFormatData((prev) => ({ ...prev, image: data }));
+          handleImageUpload();
+        }}
+        setBackImage={(data) => {
           setFormatData((prev) => ({ ...prev, image: data }))
         }
-        setBackImage={(data) =>
-          setFormatData((prev) => ({ ...prev, image: data }))
         }
       />
     </div>

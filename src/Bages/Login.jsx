@@ -20,7 +20,9 @@ export default function Login() {
 
   // Handle input changes
   const handleChange = (e) => {
-    setFormatData({ ...formatData, [e.target.name]: e.target.value });
+    const value = e.target.value;
+    const numericValue = value.replace(/[^0-9]/g, '');
+    setFormatData({ ...formatData, [e.target.name]: numericValue });
   };
 
   // Handle form submission
@@ -37,8 +39,7 @@ export default function Login() {
       return;
     }
 
-    const formData = new FormData();
-
+    const formData = new FormData()
     if (formatData.image.startsWith("data:image")) {
       const base64Response = await fetch(formatData.image);
       const blob = await base64Response.blob();
@@ -46,7 +47,6 @@ export default function Login() {
     } else {
       formData.append("image", formatData.image);
     }
-
     formData.append("student_id", formatData.id); // Match API expectation
     formData.append("name", formatData.name);
 
@@ -56,15 +56,12 @@ export default function Login() {
         {
           method: "POST",
           body: formData,
-          // Let browser set the Content-Type header for FormData
         }
       );
-
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.detail || "Registration failed");
       }
-
       const data = await response.json();
       console.log("Success:", data);
       setResponseMessage("Registration successful!✅");
@@ -153,6 +150,7 @@ export default function Login() {
             <div className={styles.inputGroup}>
               <input
                 type="password"
+                maxLength={6}
                 name="id"
                 value={formatData.id}
                 onChange={handleChange}

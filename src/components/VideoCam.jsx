@@ -151,7 +151,6 @@ export default function VideoCam({ sendData, detectCheck }) {
   const reloadPage = () => {
     window.location.reload();
   };
-
   return message ? (
     <Message value={"I can't access the camera 🔐"} className={"error message"} type={"error"}>
       <button onClick={reloadPage} className={styles.reloadBtn}>
@@ -174,6 +173,7 @@ export default function VideoCam({ sendData, detectCheck }) {
         <canvas ref={canvasRef} className={styles.canvas}></canvas></>
       }
       {image && (
+       
         <div className={styles.photoContainer}>
           <img src={image} alt="Captured" className={styles.imageCaptured} />
         </div>
