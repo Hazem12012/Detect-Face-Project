@@ -1,0 +1,38 @@
+/** @format */
+
+.textBox {
+  padding: 25px 50px;
+  color: #fff;
+  text-align: right;
+}
+.textBox h1 {
+  /* direction: rtl; */
+  margin-bottom: 10px;
+  color: #9c9c9c;
+
+}
+.textBox h1 i {
+  display: inline;
+  margin-right: 10px;
+  color: #1d6cf5;
+  font-size: 30px;
+}
+.textBox p {
+    
+  direction: rtl;
+  color: #fff;
+  font-size: 23px;
+  text-align: right;
+  transition: 0.3s ease-in-out;
+}
+.textBox p:hover{
+  color: #6ba1ff;
+
+}
+.textBox p i {
+  display: inline;
+  margin-right: 10px;
+  color: #ffeb3bb3;
+  font-size: 20px;
+  margin-left: 10px;
+}

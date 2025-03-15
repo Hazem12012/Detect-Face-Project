@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Login.module.css";
-import LoginImage from "../components/assets/loginImage.webp";
+import LoginImage from "../components/assets/Login_Image.png";
 import Popup from "../components/Popup";
 import DemoImage from "../components/assets/demo-Image.jpg";
 import ResponseMessage from "../components/ResponseMessage";
@@ -20,9 +20,12 @@ export default function Login() {
 
   // Handle input changes
   const handleChange = (e) => {
-    const value = e.target.value;
-    const numericValue = value.replace(/[^0-9]/g, '');
-    setFormatData({ ...formatData, [e.target.name]: numericValue });
+    const { name, value } = e.target;
+
+    setFormatData((prev) => ({
+      ...prev,
+      [name]: name === "id" ? value.replace(/[^0-9]/g, "") : value, // Ensure `id` only contains numbers
+    }));
   };
 
   // Handle form submission
@@ -63,7 +66,7 @@ export default function Login() {
         throw new Error(errorData.detail || "Registration failed");
       }
       const data = await response.json();
-      console.log("Success:", data);
+      // console.log("Success:", data);
       setResponseMessage("Registration successful!✅");
 
       setFormatData({

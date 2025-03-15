@@ -31,7 +31,7 @@ function Registration() {
       // setResponseMessage("❌ Please select an image!");
       setIsLoading(false);
       return;
-    }
+    }   
 
     const formData = new FormData();
     try {
